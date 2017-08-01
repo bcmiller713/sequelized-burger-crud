@@ -1,21 +1,24 @@
-var orm = require("../config/orm.js");
+module.exports = function(sequelize, DataTypes) {
 
-var burger = {
-	selectAll: function(callback) {
-		orm.selectAll("burgers", function(res) {
-			callback(res);
-		});
-	},
-	insertOne: function(columns, values, callback) {
-		orm.insertOne("burgers", columns, values, function(res) {
-			callback(res);
-		});
-	},
-	updateOne: function(objColVals, condition, callback) {
-		orm.updateOne("burgers", objColVals, condition, function(res) {
-			callback(res);
-		});
-	}
+  var Burger = sequelize.define("Burger", {
+    burger_name: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    devoured: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    }
+  });
+
+  // Burger.associate = function(models) {
+  //   Post.belongsTo(models.Creator, {
+  //     foreignKey: {
+  //       allowNull: false
+  //     }
+  //   });
+  // };
+
+  return Burger;
+  
 };
-
-module.exports = burger;
