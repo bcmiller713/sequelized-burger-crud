@@ -11,13 +11,14 @@ module.exports = function(sequelize, DataTypes) {
     }
   });
 
-  // Burger.associate = function(models) {
-  //   Post.belongsTo(models.Creator, {
-  //     foreignKey: {
-  //       allowNull: false
-  //     }
-  //   });
-  // };
+  Burger.associate = function(models) {
+    // Associating Burger with Customer
+    Burger.belongsTo(models.Customer, {
+      foreignKey: {
+        allowNull: false
+      }
+    });
+  }
 
   return Burger;
   
