@@ -1,29 +1,29 @@
-var express = require("express");
-var router = express.Router();
-var db = require("../models");
+const express = require("express");
+const router = express.Router();
+const db = require("../models");
 
-router.get("/", function(req, res) {
+router.get("/", (req, res) => {
 
 	db.Burger.findAll({
 		include: [ db.Customer ]
-	}).then(function(dbBurger) {
+	}).then( (dbBurger) => {
 
 		res.render("index", {burgers: dbBurger});
 
 	});
 });
 
-router.post("/", function(req, res) {
+router.post("/", (req, res) => {
 
 	db.Customer.create({
 		customer_name: "placeholder"
-	}).then(function(dbCustomer) {
+	}).then( (dbCustomer) => {
 
 		db.Burger.create({
 			burger_name: req.body.name,
 			devoured: req.body.devoured,
 			CustomerId: dbCustomer.dataValues.id
-		}).then(function(dbBurger) {
+		}).then( (dbBurger) => {
 
 				res.redirect("/");
 
@@ -37,7 +37,7 @@ router.put("/:id", function(req, res) {
 
 	db.Burger.findAll({
 		include: [ db.Customer ]
-	}).then(function(results) {
+	}).then( (results) => {
 		
 		db.Customer.update(
 			{
@@ -47,7 +47,7 @@ router.put("/:id", function(req, res) {
 				where: {
 					id: req.params.id
 				}
-			}).then(function(dbCustomer) {
+			}).then( (dbCustomer) => {
 				db.Burger.update(
 				{
 					devoured: true
@@ -56,7 +56,7 @@ router.put("/:id", function(req, res) {
 		      where: {
 		        id: req.params.id
 		      }
-		  	}).then(function(dbBurger) {
+		  	}).then( (dbBurger) => {
 
 					res.redirect("/");
 

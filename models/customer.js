@@ -1,13 +1,13 @@
-module.exports = function(sequelize, DataTypes) {
+module.exports = (sequelize, DataTypes) => {
   
-  var Customer = sequelize.define("Customer", {
+  let Customer = sequelize.define("Customer", {
     customer_name: {
       type: DataTypes.STRING,
       allowNull: false
     }
   });
 
-  Customer.associate = function(models) {
+  Customer.associate = (models) => {
     // Associating Customer with Burger
     Customer.hasMany(models.Burger);
   };

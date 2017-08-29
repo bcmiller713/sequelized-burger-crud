@@ -1,6 +1,6 @@
-module.exports = function(sequelize, DataTypes) {
+module.exports = (sequelize, DataTypes) => {
 
-  var Burger = sequelize.define("Burger", {
+  let Burger = sequelize.define("Burger", {
     burger_name: {
       type: DataTypes.STRING,
       allowNull: false
@@ -11,7 +11,7 @@ module.exports = function(sequelize, DataTypes) {
     }
   });
 
-  Burger.associate = function(models) {
+  Burger.associate = (models) => {
     // Associating Burger with Customer
     Burger.belongsTo(models.Customer, {
       foreignKey: {
